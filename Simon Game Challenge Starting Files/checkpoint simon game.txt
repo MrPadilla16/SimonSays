@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Simon</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+</head>
+
+<body>
+  <h1 id="level-title">Press A Key to Start</h1>
+  <div class="container">
+    <div lass="row">
+
+      <div type="button" id="green" class="green">
+
+      </div>
+
+      <div type="button" id="red" class="red">
+
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div type="button" id="yellow" class="yellow">
+
+      </div>
+      <div type="button" id="blue" class="blue">
+
+      </div>
+
+    </div>
+
+  </div>
+<script>
+  //*************************************************************************************************************************************************
+  let myArray = [];
+  let userArray = [];
+  let randomNumber=0;
+  pcTurn();
+
+  function pcTurn() {
+        // Array to store the random numbers
+        
+
+        // Function to generate a random number between min and max (inclusive)
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+
+        randomNumber = getRandomNumber(1, 4);
+        myArray.push(randomNumber);
+
+        switch (randomNumber) {
+          case 1:
+            console.log("Pc chose number one");
+            break;
+            userTurn();
+          case 2:
+            console.log("Pc chose number two");
+            userTurn();
+            break;
+          case 3:
+            console.log("Pc chose number three");
+            userTurn();
+            break;
+          case 4:
+            console.log("Pc chose number four");
+            userTurn();
+            break;
+          default:
+            console.log("You Lose!");
+            userTurn();
+        }
+//console.log("Updated Pc array:", myArray);
+      }
+
+        // HTML button elements
+  function userTurn(){
+        document.getElementById("green").addEventListener("click", btnOne);
+        document.getElementById("red").addEventListener("click", btnTwo);
+        document.getElementById("yellow").addEventListener("click", btnThree);
+        document.getElementById("blue").addEventListener("click", btnFour);
+        }
+
+        // button1 click event listener to apply function
+        function btnOne(){
+
+            userArray.push(1);
+            console.log("User Array"+userArray);
+            compareCheck()
+        }
+        function btnTwo(){
+            userArray.push(2);
+            console.log("User Array"+userArray);
+            compareCheck()
+        }
+        function btnThree(){
+            userArray.push(3);
+            console.log("User Array"+userArray);
+            compareCheck()
+        }
+        function btnFour(){
+            userArray.push(4);
+            console.log("User Array"+userArray);
+            compareCheck()
+        }
+
+  function compareCheck(){
+    if (JSON.stringify(userArray) === JSON.stringify(myArray)){
+      pcTurn();
+    } else {
+      alert("Game Over");
+    }
+
+  } 
+
+
+
+        // Displaying the result
+        console.log("Generated random number:", randomNumber);
+        console.log("Updated Pc array:", myArray);
+
+//while loop to generate array and wait until
+
+       // randomNumber = getRandomNumber(1, 4);
+       // myArray.push(randomNumber);
+
+
+</script>
+
+</body>
+
+</html>

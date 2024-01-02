@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>🕹Simon Says Game🎮</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="scoreboard">
+  <h1 id="title">Click Here to Start</h1>
+  <h2 id="score">Best Score: </h2><p id="pbestScore"></p>
+  <h2 id="score">Score: </h2><p id="pscore"></p></div>
+  <div class="container">
+    <div class="row">
+
+      <div type="button" id="green" class="green">
+
+      </div>
+
+      <div type="button" id="red" class="red">
+
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div type="button" id="yellow" class="yellow">
+
+      </div>
+      <div type="button" id="blue" class="blue">
+
+      </div>
+
+    </div>
+
+  </div>
+<script>
+ 
+  //*************************************************************************************************************************************************
+  let myArray = [];
+  let userArray = [];
+  let randomNumber=0;
+  var score=0;
+  var bestScore=0;
+  if (score>bestScore){
+bestScore=score;
+  }
+  document.getElementById("title").addEventListener("click", function(s){pcTurn()});
+  
+  
+  
+
+  function pcTurn() {
+    
+        $("h1").text("Computers Turn!");
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+
+        randomNumber = getRandomNumber(1, 4);
+        myArray.push(randomNumber);
+        console.log("random number created "+randomNumber);
+        
+        delayedLoop();
+
+
+    }
+        document.getElementById("green").addEventListener("click", function(g){userArray.push(1), ifCompare()});
+        document.getElementById("red").addEventListener("click", function(r){ userArray.push(2), ifCompare()});
+        document.getElementById("yellow").addEventListener("click", function(y){ userArray.push(3), ifCompare()});
+        document.getElementById("blue").addEventListener("click", function(b){ userArray.push(4), ifCompare()});
+
+
+        // HTML button elements
+  function userTurn(){
+        $("h1").text("Your Turn!");
+        
+        console.log(myArray);
+        console.log(userArray);
+        
+
+     }   
+  function ifCompare()
+{
+  console.log("running if compare loop")
+  if (userArray.length!= myArray.length){
+        console.log("array not full yet")
+        }else {
+          compareCheck();
+        }
+}
+
+
+  function compareCheck(){
+   if (JSON.stringify(userArray) === JSON.stringify(myArray)){
+           
+      console.log("succesfully first level");
+      score=(userArray.length)*100;
+      if (score>bestScore){
+      alert("😎New High Score!!!😃");
+      bestScore=score;
+        }
+      document.getElementById("pscore").innerHTML=score;
+      document.getElementById("pbestScore").innerHTML=bestScore;
+      userArray=[];
+      pcTurn();
+      
+    } else {
+      alert("🥺Game Over 😭");
+      $("h1").text("Try Again");
+      score=(userArray.length)*100;
+      
+      myArray=[];
+      userArray=[];
+      score=0;
+      document.getElementById("pscore").innerHTML=score;
+      
+    }
+
+
+  } 
+  
+
+
+
+      ///////////////////////TEST///////////////////////////////
+      function delayedLoop() {
+        // var myArray = [1, 2, 3, 4, 5];
+         var delay = 1000; // 1 second
+
+         function processItem(index) {
+            // Perform some task with the current item
+            console.log("Processing item:", myArray[index]);
+              animation(myArray[index]);
+            // Check if there are more myArray to process
+            if (index < myArray.length-1) {
+               // Set a timeout to process the next item after the delay
+               setTimeout(function () {
+                  processItem(index + 1);
+               }, delay);
+            }
+         }
+
+         // Start the loop with the first item
+        processItem(0);
+          setTimeout(function() {
+            userTurn();//your code to be executed after 1 second
+          }, myArray.length*1000);
+         
+      }
+
+
+
+function animation(numAnimate){
+
+      ///////////////////////////////////////////////////////
+          
+      switch (numAnimate) {
+          case 1:
+            $("#green").css("background-color", "white");
+            setTimeout(() => {
+              $("#green").css("background-color", "green");
+          
+            }, "500");
+            console.log("animating first");
+
+            break;
+          case 2:
+            $("#red").css("background-color", "white");
+            setTimeout(() => {
+              $("#red").css("background-color", "red");
+            }, "500");
+            console.log("animating second");
+            break;
+          case 3:
+            $("#yellow").css("background-color", "white");
+            setTimeout(() => {
+              $("#yellow").css("background-color", "yellow");
+            }, "500");
+            console.log("animating third");
+            break;
+          case 4:
+            $("#blue").css("background-color", "white");
+            setTimeout(() => {
+              $("#blue").css("background-color", "blue");
+            }, "500");
+            console.log("animating fourth");
+            break;
+          
+            default:
+            console.log("Error in animation");
+                 
+          } 
+          
+           
+}
+   
+  
+
+  
+
+//delayedLoop();
+        console.log("Generated random number: Last check", randomNumber);
+        console.log("Updated Pc array: Last check", myArray);
+
+
+</script>
+<footer>
+  <h3>Created by Miguel A. Padilla.</h3>
+</footer>
+</body>
+
+</html>
